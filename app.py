@@ -15,23 +15,27 @@ class CCCResuelve:
         self.paso = 1
         return self.guia()
 
-    def guia(pregunta):
-    respuesta = client.chat.completions.create(
-        model="gpt-4o-mini",
-        messages=[
-            {
-                "role": "system",
-                "content": "Eres CCCResolve, un tutor que ayuda a estudiantes sin hacerles la tarea completa. Explica paso a paso y haz preguntas si es necesario."
-            },
-            {
-                "role": "user",
-                "content": pregunta
-            }
-        ],
-        temperature=0.7
-    )
+    class CCCResolve:
+    def __init__(self):
+        self.paso = 1
 
-    return respuesta.choices[0].message.content
+    def guia(self, pregunta):
+        respuesta = client.chat.completions.create(
+            model="gpt-4o-mini",
+            messages=[
+                {
+                    "role": "system",
+                    "content": "Eres CCCResolve, un tutor que ayuda a estudiantes sin hacerles la tarea completa. Explica paso a paso y haz preguntas."
+                },
+                {
+                    "role": "user",
+                    "content": pregunta
+                }
+            ],
+            temperature=0.7
+        )
+
+        return respuesta.choices[0].message.content
 
     def matematicas(self, respuesta):
         if self.paso == 1:
