@@ -16,7 +16,7 @@ class CCCResuelve:
         return self.guia()
 
     class CCCResolve:
-    def __init__(self):
+        def __init__(self):
         self.paso = 1
 
     def guia(self, pregunta):
