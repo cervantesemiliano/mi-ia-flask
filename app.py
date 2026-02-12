@@ -15,8 +15,9 @@ class CCCResuelve:
         self.paso = 1
         return self.guia()
 
-    class CCCResolve:
-        def __init__(self):
+class CCCResolve:
+
+    def __init__(self):
         self.paso = 1
 
     def guia(self, pregunta):
@@ -25,7 +26,7 @@ class CCCResuelve:
             messages=[
                 {
                     "role": "system",
-                    "content": "Eres CCCResolve, un tutor que ayuda a estudiantes sin hacerles la tarea completa. Explica paso a paso y haz preguntas."
+                    "content": "Eres CCCResolve, un tutor que ayuda paso a paso."
                 },
                 {
                     "role": "user",
@@ -36,7 +37,7 @@ class CCCResuelve:
         )
 
         return respuesta.choices[0].message.content
-
+                
     def matematicas(self, respuesta):
         if self.paso == 1:
             self.paso = 2
