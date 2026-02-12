@@ -1,6 +1,8 @@
-from flask import Flask, request, render_template_string
+from flask import Flask, request, render_template_string, session
+import os
 
 app = Flask(__name__)
+app.secret_key = os.environ.get("SECRET KEY", "clave secreta")
 
 class CCCResuelve:
     def __init__(self):
@@ -72,7 +74,6 @@ class CCCResuelve:
         return "¡Muy bien! Con eso ya puedes hacer un resumen histórico completo."
 
 ccc = CCCResuelve()
-historial = []
 
 html = """
 <!DOCTYPE html>
@@ -158,7 +159,9 @@ html = """
 
 @app.route("/", methods=["GET", "POST"])
 def index():
-    global historial, ccc
+    if "historial" not in session:
+        session["historial"] = []
+    historial = session["historial"]
 
     if request.method == "POST":
         materia = request.form["materia"]
@@ -172,6 +175,7 @@ def index():
             respuesta = ccc.guia(pregunta)
 
         historial.append(("CCCResuelve", respuesta))
+        session["historial"] = hustorial 
 
     return render_template_string(html, historial=historial)
 
