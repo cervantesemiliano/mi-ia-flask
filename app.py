@@ -15,16 +15,23 @@ class CCCResuelve:
         self.paso = 1
         return self.guia()
 
-    def guia(self, respuesta_usuario=""):
-        if self.materia == "matematicas":
-            return self.matematicas(respuesta_usuario)
-        if self.materia == "fisica":
-            return self.fisica(respuesta_usuario)
-        if self.materia == "quimica":
-            return self.quimica(respuesta_usuario)
-        if self.materia == "historia":
-            return self.historia(respuesta_usuario)
-        return "Materia no disponible 😅"
+    def guia(pregunta):
+    respuesta = client.chat.completions.create(
+        model="gpt-4o-mini",
+        messages=[
+            {
+                "role": "system",
+                "content": "Eres CCCResolve, un tutor que ayuda a estudiantes sin hacerles la tarea completa. Explica paso a paso y haz preguntas si es necesario."
+            },
+            {
+                "role": "user",
+                "content": pregunta
+            }
+        ],
+        temperature=0.7
+    )
+
+    return respuesta.choices[0].message.content
 
     def matematicas(self, respuesta):
         if self.paso == 1:
