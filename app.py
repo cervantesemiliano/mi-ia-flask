@@ -170,7 +170,7 @@ html = """
 </html>
 """
 
-@app.route("/", methods=["GET", "POST"] 
+@app.route("/", methods=["GET", "POST"])
         
 def index():
     if "historial" not in session:
